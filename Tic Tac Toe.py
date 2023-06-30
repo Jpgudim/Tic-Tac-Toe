@@ -1,6 +1,10 @@
 # This is my first attempt at making tic-tac-toe in python entirely from scratch
 # I'm not exactly sure how to do it, so i'm going to figure it out as I go
 
+#To do list:
+# scenarios when it's impossible for a player to win
+# input is not an integer
+
 board = []
 for x in range(0,3):
     board.append(["[ ]"] * 3)
@@ -9,10 +13,16 @@ print ()
 print ("Welcome to Tic Tac Toe! Here is the game board, with numbers representing each sqaure")
 print ()
 
+#function to display the board
 def get_board(board):
     print ()
     for row in board:
         print (" ".join(row))
+    print ()
+
+#function when a player wins the game
+def win_game(player):
+    print ("Player %s, you win!" % player)
     print ()
     
 print ("Player 1, you are X's and player 2, you are O's")
@@ -22,11 +32,43 @@ for turn in range(9):
     print ("Player " + str((turn % 2) + 1) + ", your turn!")
     get_board(board)
 
-
-# trying to make winning scenario
-    if board[1] == ['[X]', '[X]', '[X]']:
-        print ("Player 1, you Win!")
-        
+#winning scenarios
+    if board[0] == ['[X]', '[X]', '[X]'] or board[1] == ['[X]', '[X]', '[X]'] or board[2] == ['[X]', '[X]', '[X]']:
+        win_game(1)
+        break
+    elif board[0] == ['[O]', '[O]', '[O]'] or board[1] == ['[O]', '[O]', '[O]'] or board[2] == ['[O]', '[O]', '[O]']:
+        win_game(2)
+        break
+    elif board[0][0] == "[X]" and board[1][0] == "[X]" and board[2][0] == "[X]":
+        win_game(1)
+        break
+    elif board[0][1] == "[X]" and board[1][1] == "[X]" and board[2][1] == "[X]":
+        win_game(1)
+        break
+    elif board[0][2] == "[X]" and board[1][2] == "[X]" and board[2][2] == "[X]":
+        win_game(1)
+        break
+    elif board[0][0] == "[O]" and board[1][0] == "[O]" and board[2][0] == "[O]":
+        win_game(2)
+        break
+    elif board[0][1] == "[O]" and board[1][1] == "[O]" and board[2][1] == "[O]":
+        win_game(2)
+        break
+    elif board[0][2] == "[O]" and board[1][2] == "[O]" and board[2][2] == "[O]":
+        win_game(2)
+        break
+    elif board[0][0] == "[X]" and board[1][1] == "[X]" and board[2][2] == "[X]":
+        win_game(1)
+        break
+    elif board[0][2] == "[X]" and board[1][1] == "[X]" and board[2][0] == "[X]":
+        win_game(1)
+        break
+    elif board[0][0] == "[O]" and board[1][1] == "[O]" and board[2][2] == "[O]":
+        win_game(2)
+        break
+    elif board[0][2] == "[O]" and board[1][1] == "[O]" and board[2][0] == "[O]":
+        win_game(2)
+        break
     else:
         row_select = int(input("Select Row: "))
         col_select = int(input("Select Col: "))
@@ -44,20 +86,26 @@ for turn in range(9):
                 board[row_select - 1][col_select - 1] = "[O]"
                 get_board(board)
         elif board[row_select - 1][col_select - 1] == "[X]" or board[row_select - 1][col_select - 1] == "[O]":
+            
             print ()
             print ("That spot has already been taken!")
             print ()
             print ("Player " + str((turn % 2) + 1) + ", go again!")
+
             get_board(board)
+
             row_select = int(input("Select Row: "))
             col_select = int(input("Select Col: "))
+
             if (turn % 2) == 0:
                 board[row_select - 1][col_select - 1] = "[X]"
                 get_board(board)
             else:
                 board[row_select - 1][col_select - 1] = "[O]"
                 get_board(board)
+
             get_board(board)    
+
         else:
             if (turn % 2) == 0:
                 board[row_select - 1][col_select - 1] = "[X]"
@@ -65,17 +113,6 @@ for turn in range(9):
             else:
                 board[row_select - 1][col_select - 1] = "[O]"
                 get_board(board)
-
-    
-#scenarios I need to work on:
-#1. input is not an int
-#       simple if statement, just need to figure out where to put it
-#2. no longer possible for a player to win the game
-#       no idea how I will do this
-
-#potential issues with code:
-#1. not finished
-#2. lot of repeating if/else scenarios. I feel like it could be optimized and cleaned
 
 
 
