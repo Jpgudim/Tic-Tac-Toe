@@ -3,7 +3,7 @@
 
 #To do list:
 # scenarios when it's impossible for a player to win
-# input is not an integer
+
 
 board = []
 for x in range(0,3):
@@ -19,19 +19,37 @@ def get_board(board):
     for row in board:
         print (" ".join(row))
     print ()
-
 #function when a player wins the game
 def win_game(player):
     print ("Player %s, you win!" % player)
     print ()
-    
-print ("Player 1, you are X's and player 2, you are O's")
+#function to get user input for row selection
+def get_row():
+    row_select = input("Select Row: ")
+    if row_select in "0123456789":
+        row_select = int(row_select)
+    while type(row_select) != int:
+        row_select = input("That's not a number! Select Row Again: ")
+        if row_select in "0123456789":
+            row_select = int(row_select)
+    return row_select
+#function to get user input for column selection
+def get_col():
+    col_select = input("Select Column: ")
+    if col_select in "0123456789":
+        col_select = int(col_select)
+    while type(col_select) != int:
+        col_select = input("That's not a number! Select Column Again: ")
+        if col_select in "0123456789":
+            col_select = int(col_select)
+    return col_select
 
+print ("Player 1, you are X's and player 2, you are O's")
+#start game loop
 for turn in range(9):
     turn + 1
     print ("Player " + str((turn % 2) + 1) + ", your turn!")
     get_board(board)
-
 #winning scenarios
     if board[0] == ['[X]', '[X]', '[X]'] or board[1] == ['[X]', '[X]', '[X]'] or board[2] == ['[X]', '[X]', '[X]']:
         win_game(1)
@@ -70,49 +88,26 @@ for turn in range(9):
         win_game(2)
         break
     else:
-        row_select = int(input("Select Row: "))
-        col_select = int(input("Select Col: "))
-        if  row_select > 3 or col_select > 3:
-            
+        row_select = get_row()
+        col_select = get_col()
+        while row_select not in range(4) or col_select not in range(4):
             print()
             print ("That's not on the board! Try again player " + str((turn % 2) + 1))
             get_board(board)
-            row_select = int(input("Select Row: "))
-            col_select = int(input("Select Col: "))
-            if (turn % 2) == 0:
-                board[row_select - 1][col_select - 1] = "[X]"
-                #board
-            else:
-                board[row_select - 1][col_select - 1] = "[O]"
-                #board
-        elif board[row_select - 1][col_select - 1] == "[X]" or board[row_select - 1][col_select - 1] == "[O]":
-            
+            row_select = get_row()
+            col_select = get_col()
+        while board[row_select - 1][col_select - 1] == "[X]" or board[row_select - 1][col_select - 1] == "[O]":
             print ()
             print ("That spot has already been taken!")
             print ()
             print ("Player " + str((turn % 2) + 1) + ", go again!")
-
             get_board(board)
-
-            row_select = int(input("Select Row: "))
-            col_select = int(input("Select Col: "))
-
-            if (turn % 2) == 0:
-                board[row_select - 1][col_select - 1] = "[X]"
-                #board
-            else:
-                board[row_select - 1][col_select - 1] = "[O]"
-                #board
-
-            #board   
-
+            row_select = get_row()
+            col_select = get_col()
+        if (turn % 2) == 0:
+            board[row_select - 1][col_select - 1] = "[X]"
         else:
-            if (turn % 2) == 0:
-                board[row_select - 1][col_select - 1] = "[X]"
-                #board
-            else:
-                board[row_select - 1][col_select - 1] = "[O]"
-                #board
+            board[row_select - 1][col_select - 1] = "[O]"
 
 
 
