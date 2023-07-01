@@ -10,7 +10,7 @@ for x in range(0,3):
     board.append(["[ ]"] * 3)
 
 print ()
-print ("Welcome to Tic Tac Toe! Here is the game board, with numbers representing each sqaure")
+print ("Welcome to Tic Tac Toe! Here is the game board, with numbers representing each square")
 print ()
 
 #function to display the board
@@ -72,8 +72,8 @@ for turn in range(9):
     else:
         row_select = int(input("Select Row: "))
         col_select = int(input("Select Col: "))
-        print (board[1])
-        if  row_select not in range(4) or col_select not in range(4):
+        if  row_select > 3 or col_select > 3:
+            
             print()
             print ("That's not on the board! Try again player " + str((turn % 2) + 1))
             get_board(board)
@@ -81,10 +81,10 @@ for turn in range(9):
             col_select = int(input("Select Col: "))
             if (turn % 2) == 0:
                 board[row_select - 1][col_select - 1] = "[X]"
-                get_board(board)
+                #board
             else:
                 board[row_select - 1][col_select - 1] = "[O]"
-                get_board(board)
+                #board
         elif board[row_select - 1][col_select - 1] == "[X]" or board[row_select - 1][col_select - 1] == "[O]":
             
             print ()
@@ -99,20 +99,20 @@ for turn in range(9):
 
             if (turn % 2) == 0:
                 board[row_select - 1][col_select - 1] = "[X]"
-                get_board(board)
+                #board
             else:
                 board[row_select - 1][col_select - 1] = "[O]"
-                get_board(board)
+                #board
 
-            get_board(board)    
+            #board   
 
         else:
             if (turn % 2) == 0:
                 board[row_select - 1][col_select - 1] = "[X]"
-                get_board(board)
+                #board
             else:
                 board[row_select - 1][col_select - 1] = "[O]"
-                get_board(board)
+                #board
 
 
 
